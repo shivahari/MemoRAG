@@ -233,7 +233,7 @@ class MemoRAGLite:
         if print_stats:
             print(f"Detected language: {self.language}")
 
-        batch_size = self.adapt_batch_size()
+        #batch_size = self.adapt_batch_size()
 
         # Encode context
         encoding = tiktoken.get_encoding("cl100k_base")
