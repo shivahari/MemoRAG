@@ -398,7 +398,7 @@ class MemoRAGLite:
         return outputs
 
     def load(self, path):
-        _cache = torch.load(os.path.join(path, "memory.bin"))
+        _cache = torch.load(os.path.join(path, "memory.bin"), weights_only=False)
         self.memory = _cache["memory"]
         self.context_inputs = _cache["context_inputs"]
         self.prompts = _cache["prompts"]
