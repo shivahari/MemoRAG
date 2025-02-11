@@ -233,7 +233,8 @@ class MemoRAGLite:
         if print_stats:
             print(f"Detected language: {self.language}")
 
-        #batch_size = self.adapt_batch_size()
+        if torch.cuda.is_available():
+            batch_size = self.adapt_batch_size()
 
         # Encode context
         encoding = tiktoken.get_encoding("cl100k_base")

@@ -95,8 +95,14 @@ class DenseRetriever:
         else:
             dtype = torch.float32
 
+        if torch.cuda.is_available():
+            dev_map = {'':"cuda"}
+        else:
+            dev_map = {'':"cpu"}
+
+
         self.tokenizer = AutoTokenizer.from_pretrained(encoder, cache_dir=cache_dir)
-        self.encoder = AutoModel.from_pretrained(encoder, cache_dir=cache_dir, torch_dtype=dtype, device_map={'': "cuda"}, load_in_4bit=load_in_4bit).eval()
+        self.encoder = AutoModel.from_pretrained(encoder, cache_dir=cache_dir, torch_dtype=dtype, device_map=dev_map, load_in_4bit=load_in_4bit).eval()
 
         self.ndim = self.encoder.config.hidden_size
         self._index = None
